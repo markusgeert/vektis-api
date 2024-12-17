@@ -28,7 +28,7 @@ class VektisAGBWebAPIRaadplegenDataContractsReferentiegegevensGeslacht(BaseModel
     
     """ # noqa: E501
     code: Annotated[str, Field(min_length=1, strict=True, max_length=8)] = Field(description="Code ELEMENT, lengte en (alfa)numeriek is afhankelijk van de codelijst", alias="Code")
-    omschrijving: Annotated[str, Field(min_length=1, strict=True, max_length=255)] = Field(description="BETEKENIS, maxLength = 255, Omschrijving van de code", alias="Omschrijving")
+    omschrijving: Annotated[str, Field(min_length=0, strict=True, max_length=255)] = Field(description="BETEKENIS, maxLength = 255, Omschrijving van de code", alias="Omschrijving")
     __properties: ClassVar[List[str]] = ["Code", "Omschrijving"]
 
     model_config = ConfigDict(
