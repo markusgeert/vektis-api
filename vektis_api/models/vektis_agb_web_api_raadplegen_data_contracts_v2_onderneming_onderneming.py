@@ -11,7 +11,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
@@ -31,31 +30,82 @@ from vektis_api.models.vektis_agb_web_api_raadplegen_data_contracts_v2_zorgparti
 from typing import Optional, Set
 from typing_extensions import Self
 
-class VektisAGBWebAPIRaadplegenDataContractsV2OndernemingOnderneming(BaseModel):
+
+class VektisAGBWebAPIRaadplegenDataContractsV2OndernemingOnderneming(
+        BaseModel):
     """
     
-    """ # noqa: E501
-    aanvang: datetime = Field(description="DATUMAANVANG, dateTime, Datum vanaf wanneer een AGBCode geldig is", alias="Aanvang")
-    einde: Optional[datetime] = Field(default=None, description="DATUMEINDE, dateTime, Datum tot en met wanneer de AGBCode geldig is", alias="Einde")
-    adressen: Optional[List[VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijZorgpartijAdres]] = Field(default=None, description="Lijst van actieve adressen op peildatum", alias="Adressen")
-    agb_code: Annotated[str, Field(min_length=8, strict=True, max_length=8)] = Field(description="CODE, length = 8 numeriek in een string, AGBCode", alias="AGBCode")
-    communicatiegegevens: Optional[List[VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijCommunicatiegegeven]] = Field(default=None, description="Lijst van actieve communicatiegegevens op peildatum", alias="Communicatiegegevens")
-    erkenningen: Optional[List[VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijZorgpartijErkenning]] = Field(default=None, description="Lijst van actieve erkenningen op peildatum", alias="Erkenningen")
-    handelsnaam: Annotated[str, Field(min_length=1, strict=True, max_length=150)] = Field(description="HANDELSNAAM1, maxLength = 150, Eerste handelsnaam waaronder de onderneming bekend is bij het handelsregister", alias="Handelsnaam")
-    kwalificaties: Optional[List[VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijZorgpartijKwalificatie]] = Field(default=None, description="Lijst van actieve kwalificatiegegevens op peildatum", alias="Kwalificaties")
-    naam: Annotated[str, Field(min_length=1, strict=True, max_length=60)] = Field(description="ROEPNAAM, maxLength = 60, Naam waaronder de onderneming bekend is of vermeld wil staan", alias="Naam")
-    statutaire_naam: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=150)]] = Field(default=None, description="STATUTAIRENAAM, maxLength = 150, Statutaire naam waaronder de onderneming bekend is bij het handelsregister", alias="StatutaireNaam")
-    zorgpartij_type: VektisAGBWebAPIRaadplegenDataContractsReferentiegegevensZorgpartijType = Field(alias="ZorgpartijType")
-    beheerder_verlener_agb_code: VektisAGBWebAPIRaadplegenDataContractsReferentiegegevensBeheerder = Field(alias="BeheerderVerlenerAGBCode")
-    zorgsoort: VektisAGBWebAPIRaadplegenDataContractsReferentiegegevensZorgsoort = Field(alias="Zorgsoort")
-    __properties: ClassVar[List[str]] = ["Aanvang", "Einde", "Adressen", "AGBCode", "Communicatiegegevens", "Erkenningen", "Handelsnaam", "Kwalificaties", "Naam", "StatutaireNaam", "ZorgpartijType", "BeheerderVerlenerAGBCode", "Zorgsoort"]
+    """
+
+  # noqa: E501
+    aanvang: datetime = Field(
+        description=
+        "DATUMAANVANG, dateTime, Datum vanaf wanneer een AGBCode geldig is",
+        alias="Aanvang")
+    einde: Optional[datetime] = Field(
+        default=None,
+        description=
+        "DATUMEINDE, dateTime, Datum tot en met wanneer de AGBCode geldig is",
+        alias="Einde")
+    adressen: Optional[List[
+        VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijZorgpartijAdres]] = Field(
+            default=None,
+            description="Lijst van actieve adressen op peildatum",
+            alias="Adressen")
+    agb_code: Annotated[
+        str, Field(min_length=8, strict=True, max_length=8)] = Field(
+            description="CODE, length = 8 numeriek in een string, AGBCode",
+            alias="AGBCode")
+    communicatiegegevens: Optional[List[
+        VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijCommunicatiegegeven]] = Field(
+            default=None,
+            description="Lijst van actieve communicatiegegevens op peildatum",
+            alias="Communicatiegegevens")
+    erkenningen: Optional[List[
+        VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijZorgpartijErkenning]] = Field(
+            default=None,
+            description="Lijst van actieve erkenningen op peildatum",
+            alias="Erkenningen")
+    handelsnaam: Annotated[
+        str, Field(min_length=1, strict=True, max_length=150)] = Field(
+            description=
+            "HANDELSNAAM1, maxLength = 150, Eerste handelsnaam waaronder de onderneming bekend is bij het handelsregister",
+            alias="Handelsnaam")
+    kwalificaties: Optional[List[
+        VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijZorgpartijKwalificatie]] = Field(
+            default=None,
+            description="Lijst van actieve kwalificatiegegevens op peildatum",
+            alias="Kwalificaties")
+    naam: Annotated[str, Field(
+        min_length=1, strict=True, max_length=100
+    )] = Field(
+        description=
+        "ROEPNAAM, maxLength = 60, Naam waaronder de onderneming bekend is of vermeld wil staan",
+        alias="Naam")
+    statutaire_naam: Optional[Annotated[
+        str, Field(min_length=0, strict=True, max_length=150)]] = Field(
+            default=None,
+            description=
+            "STATUTAIRENAAM, maxLength = 150, Statutaire naam waaronder de onderneming bekend is bij het handelsregister",
+            alias="StatutaireNaam")
+    zorgpartij_type: VektisAGBWebAPIRaadplegenDataContractsReferentiegegevensZorgpartijType = Field(
+        alias="ZorgpartijType")
+    beheerder_verlener_agb_code: VektisAGBWebAPIRaadplegenDataContractsReferentiegegevensBeheerder = Field(
+        alias="BeheerderVerlenerAGBCode")
+    zorgsoort: VektisAGBWebAPIRaadplegenDataContractsReferentiegegevensZorgsoort = Field(
+        alias="Zorgsoort")
+    __properties: ClassVar[List[str]] = [
+        "Aanvang", "Einde", "Adressen", "AGBCode", "Communicatiegegevens",
+        "Erkenningen", "Handelsnaam", "Kwalificaties", "Naam",
+        "StatutaireNaam", "ZorgpartijType", "BeheerderVerlenerAGBCode",
+        "Zorgsoort"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -81,8 +131,7 @@ class VektisAGBWebAPIRaadplegenDataContractsV2OndernemingOnderneming(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set([])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -122,7 +171,9 @@ class VektisAGBWebAPIRaadplegenDataContractsV2OndernemingOnderneming(BaseModel):
             _dict['ZorgpartijType'] = self.zorgpartij_type.to_dict()
         # override the default output from pydantic by calling `to_dict()` of beheerder_verlener_agb_code
         if self.beheerder_verlener_agb_code:
-            _dict['BeheerderVerlenerAGBCode'] = self.beheerder_verlener_agb_code.to_dict()
+            _dict[
+                'BeheerderVerlenerAGBCode'] = self.beheerder_verlener_agb_code.to_dict(
+                )
         # override the default output from pydantic by calling `to_dict()` of zorgsoort
         if self.zorgsoort:
             _dict['Zorgsoort'] = self.zorgsoort.to_dict()
@@ -138,20 +189,45 @@ class VektisAGBWebAPIRaadplegenDataContractsV2OndernemingOnderneming(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "Aanvang": obj.get("Aanvang"),
-            "Einde": obj.get("Einde"),
-            "Adressen": [VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijZorgpartijAdres.from_dict(_item) for _item in obj["Adressen"]] if obj.get("Adressen") is not None else None,
-            "AGBCode": obj.get("AGBCode"),
-            "Communicatiegegevens": [VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijCommunicatiegegeven.from_dict(_item) for _item in obj["Communicatiegegevens"]] if obj.get("Communicatiegegevens") is not None else None,
-            "Erkenningen": [VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijZorgpartijErkenning.from_dict(_item) for _item in obj["Erkenningen"]] if obj.get("Erkenningen") is not None else None,
-            "Handelsnaam": obj.get("Handelsnaam"),
-            "Kwalificaties": [VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijZorgpartijKwalificatie.from_dict(_item) for _item in obj["Kwalificaties"]] if obj.get("Kwalificaties") is not None else None,
-            "Naam": obj.get("Naam"),
-            "StatutaireNaam": obj.get("StatutaireNaam"),
-            "ZorgpartijType": VektisAGBWebAPIRaadplegenDataContractsReferentiegegevensZorgpartijType.from_dict(obj["ZorgpartijType"]) if obj.get("ZorgpartijType") is not None else None,
-            "BeheerderVerlenerAGBCode": VektisAGBWebAPIRaadplegenDataContractsReferentiegegevensBeheerder.from_dict(obj["BeheerderVerlenerAGBCode"]) if obj.get("BeheerderVerlenerAGBCode") is not None else None,
-            "Zorgsoort": VektisAGBWebAPIRaadplegenDataContractsReferentiegegevensZorgsoort.from_dict(obj["Zorgsoort"]) if obj.get("Zorgsoort") is not None else None
+            "Aanvang":
+            obj.get("Aanvang"),
+            "Einde":
+            obj.get("Einde"),
+            "Adressen": [
+                VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijZorgpartijAdres
+                .from_dict(_item) for _item in obj["Adressen"]
+            ] if obj.get("Adressen") is not None else None,
+            "AGBCode":
+            obj.get("AGBCode"),
+            "Communicatiegegevens": [
+                VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijCommunicatiegegeven
+                .from_dict(_item) for _item in obj["Communicatiegegevens"]
+            ] if obj.get("Communicatiegegevens") is not None else None,
+            "Erkenningen": [
+                VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijZorgpartijErkenning
+                .from_dict(_item) for _item in obj["Erkenningen"]
+            ] if obj.get("Erkenningen") is not None else None,
+            "Handelsnaam":
+            obj.get("Handelsnaam"),
+            "Kwalificaties": [
+                VektisAGBWebAPIRaadplegenDataContractsV2ZorgpartijZorgpartijKwalificatie
+                .from_dict(_item) for _item in obj["Kwalificaties"]
+            ] if obj.get("Kwalificaties") is not None else None,
+            "Naam":
+            obj.get("Naam"),
+            "StatutaireNaam":
+            obj.get("StatutaireNaam"),
+            "ZorgpartijType":
+            VektisAGBWebAPIRaadplegenDataContractsReferentiegegevensZorgpartijType
+            .from_dict(obj["ZorgpartijType"])
+            if obj.get("ZorgpartijType") is not None else None,
+            "BeheerderVerlenerAGBCode":
+            VektisAGBWebAPIRaadplegenDataContractsReferentiegegevensBeheerder.
+            from_dict(obj["BeheerderVerlenerAGBCode"])
+            if obj.get("BeheerderVerlenerAGBCode") is not None else None,
+            "Zorgsoort":
+            VektisAGBWebAPIRaadplegenDataContractsReferentiegegevensZorgsoort.
+            from_dict(obj["Zorgsoort"])
+            if obj.get("Zorgsoort") is not None else None
         })
         return _obj
-
-
