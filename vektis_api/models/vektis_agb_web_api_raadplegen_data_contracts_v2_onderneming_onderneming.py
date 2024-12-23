@@ -37,7 +37,7 @@ class VektisAGBWebAPIRaadplegenDataContractsV2OndernemingOnderneming(
     
     """
 
-  # noqa: E501
+    # noqa: E501
     aanvang: datetime = Field(
         description=
         "DATUMAANVANG, dateTime, Datum vanaf wanneer een AGBCode geldig is",
@@ -76,9 +76,7 @@ class VektisAGBWebAPIRaadplegenDataContractsV2OndernemingOnderneming(
             default=None,
             description="Lijst van actieve kwalificatiegegevens op peildatum",
             alias="Kwalificaties")
-    naam: Annotated[str, Field(
-        min_length=1, strict=True, max_length=100
-    )] = Field(
+    naam: Annotated[str, Field(min_length=1, strict=True)] = Field(
         description=
         "ROEPNAAM, maxLength = 60, Naam waaronder de onderneming bekend is of vermeld wil staan",
         alias="Naam")

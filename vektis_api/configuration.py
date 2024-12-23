@@ -11,7 +11,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 import copy
 import http.client as httplib
 import logging
@@ -23,11 +22,9 @@ from typing_extensions import NotRequired, Self
 
 import urllib3
 
-
 JSON_SCHEMA_VALIDATION_KEYWORDS = {
-    'multipleOf', 'maximum', 'exclusiveMaximum',
-    'minimum', 'exclusiveMinimum', 'maxLength',
-    'minLength', 'pattern', 'maxItems', 'minItems'
+    'multipleOf', 'maximum', 'exclusiveMaximum', 'minimum', 'exclusiveMinimum',
+    'maxLength', 'minLength', 'pattern', 'maxItems', 'minItems'
 }
 
 ServerVariablesT = Dict[str, str]
@@ -42,7 +39,6 @@ GenericAuthSetting = TypedDict(
     },
 )
 
-
 OAuth2AuthSetting = TypedDict(
     "OAuth2AuthSetting",
     {
@@ -52,7 +48,6 @@ OAuth2AuthSetting = TypedDict(
         "value": str,
     },
 )
-
 
 APIKeyAuthSetting = TypedDict(
     "APIKeyAuthSetting",
@@ -64,7 +59,6 @@ APIKeyAuthSetting = TypedDict(
     },
 )
 
-
 BasicAuthSetting = TypedDict(
     "BasicAuthSetting",
     {
@@ -74,7 +68,6 @@ BasicAuthSetting = TypedDict(
         "value": Optional[str],
     },
 )
-
 
 BearerFormatAuthSetting = TypedDict(
     "BearerFormatAuthSetting",
@@ -87,7 +80,6 @@ BearerFormatAuthSetting = TypedDict(
     },
 )
 
-
 BearerAuthSetting = TypedDict(
     "BearerAuthSetting",
     {
@@ -97,7 +89,6 @@ BearerAuthSetting = TypedDict(
         "value": str,
     },
 )
-
 
 HTTPSignatureAuthSetting = TypedDict(
     "HTTPSignatureAuthSetting",
@@ -109,11 +100,9 @@ HTTPSignatureAuthSetting = TypedDict(
     },
 )
 
-
 AuthSettings = TypedDict(
     "AuthSettings",
-    {
-    },
+    {},
     total=False,
 )
 
@@ -167,18 +156,19 @@ class Configuration:
 
     def __init__(
         self,
-        host: Optional[str]=None,
-        api_key: Optional[Dict[str, str]]=None,
-        api_key_prefix: Optional[Dict[str, str]]=None,
-        username: Optional[str]=None,
-        password: Optional[str]=None,
-        access_token: Optional[str]=None,
-        server_index: Optional[int]=None, 
-        server_variables: Optional[ServerVariablesT]=None,
-        server_operation_index: Optional[Dict[int, int]]=None,
-        server_operation_variables: Optional[Dict[int, ServerVariablesT]]=None,
-        ignore_operation_servers: bool=False,
-        ssl_ca_cert: Optional[str]=None,
+        host: Optional[str] = None,
+        api_key: Optional[Dict[str, str]] = None,
+        api_key_prefix: Optional[Dict[str, str]] = None,
+        username: Optional[str] = None,
+        password: Optional[str] = None,
+        access_token: Optional[str] = None,
+        server_index: Optional[int] = None,
+        server_variables: Optional[ServerVariablesT] = None,
+        server_operation_index: Optional[Dict[int, int]] = None,
+        server_operation_variables: Optional[Dict[int,
+                                                  ServerVariablesT]] = None,
+        ignore_operation_servers: bool = False,
+        ssl_ca_cert: Optional[str] = None,
         retries: Optional[int] = None,
         *,
         debug: Optional[bool] = None,
@@ -306,7 +296,7 @@ class Configuration:
         """date format
         """
 
-    def __deepcopy__(self, memo:  Dict[int, Any]) -> Self:
+    def __deepcopy__(self, memo: Dict[int, Any]) -> Self:
         cls = self.__class__
         result = cls.__new__(cls)
         memo[id(self)] = result
@@ -443,7 +433,9 @@ class Configuration:
         self.__logger_format = value
         self.logger_formatter = logging.Formatter(self.__logger_format)
 
-    def get_api_key_with_prefix(self, identifier: str, alias: Optional[str]=None) -> Optional[str]:
+    def get_api_key_with_prefix(self,
+                                identifier: str,
+                                alias: Optional[str] = None) -> Optional[str]:
         """Gets API key (with prefix if set).
 
         :param identifier: The identifier of apiKey.
@@ -452,7 +444,9 @@ class Configuration:
         """
         if self.refresh_api_key_hook is not None:
             self.refresh_api_key_hook(self)
-        key = self.api_key.get(identifier, self.api_key.get(alias) if alias is not None else None)
+        key = self.api_key.get(
+            identifier,
+            self.api_key.get(alias) if alias is not None else None)
         if key:
             prefix = self.api_key_prefix.get(identifier)
             if prefix:
@@ -473,11 +467,10 @@ class Configuration:
         password = ""
         if self.password is not None:
             password = self.password
-        return urllib3.util.make_headers(
-            basic_auth=username + ':' + password
-        ).get('authorization')
+        return urllib3.util.make_headers(basic_auth=username + ':' +
+                                         password).get('authorization')
 
-    def auth_settings(self)-> AuthSettings:
+    def auth_settings(self) -> AuthSettings:
         """Gets Auth Settings dict for api client.
 
         :return: The Auth Settings information dict.
@@ -502,18 +495,16 @@ class Configuration:
 
         :return: An array of host settings
         """
-        return [
-            {
-                'url': "https://test-agb-api.vektis.nl",
-                'description': "No description provided",
-            }
-        ]
+        return [{
+            'url': "https://test-agb-api.vektis.nl",
+            'description': "No description provided",
+        }]
 
     def get_host_from_settings(
         self,
         index: Optional[int],
-        variables: Optional[ServerVariablesT]=None,
-        servers: Optional[List[HostSetting]]=None,
+        variables: Optional[ServerVariablesT] = None,
+        servers: Optional[List[HostSetting]] = None,
     ) -> str:
         """Gets host URL based on the index and variables
         :param index: array index of the host settings
@@ -538,16 +529,16 @@ class Configuration:
 
         # go through variables and replace placeholders
         for variable_name, variable in server.get('variables', {}).items():
-            used_value = variables.get(
-                variable_name, variable['default_value'])
+            used_value = variables.get(variable_name,
+                                       variable['default_value'])
 
             if 'enum_values' in variable \
                     and used_value not in variable['enum_values']:
                 raise ValueError(
                     "The variable `{0}` in the host URL has invalid value "
-                    "{1}. Must be {2}.".format(
-                        variable_name, variables[variable_name],
-                        variable['enum_values']))
+                    "{1}. Must be {2}.".format(variable_name,
+                                               variables[variable_name],
+                                               variable['enum_values']))
 
             url = url.replace("{" + variable_name + "}", used_value)
 
@@ -556,7 +547,8 @@ class Configuration:
     @property
     def host(self) -> str:
         """Return generated host."""
-        return self.get_host_from_settings(self.server_index, variables=self.server_variables)
+        return self.get_host_from_settings(self.server_index,
+                                           variables=self.server_variables)
 
     @host.setter
     def host(self, value: str) -> None:
